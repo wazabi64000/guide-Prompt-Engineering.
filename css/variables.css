@@ -1,0 +1,128 @@
+/**
+ * variables.css
+ * Palette « leda et cygne » (exclusive) :
+ * #3C524D · #BD802D · #745458 · #8C322A · #D96055
+ * Texte principal : #3C524D
+ * Pas de mode sombre.
+ */
+
+:root {
+  --slate: #3C524D;
+  --ochre: #BD802D;
+  --mauve: #745458;
+  --rust: #8C322A;
+  --coral: #D96055;
+
+  --gradient-brand: linear-gradient(
+    125deg,
+    var(--slate) 0%,
+    var(--mauve) 35%,
+    var(--rust) 70%,
+    var(--coral) 100%
+  );
+  --gradient-progress: linear-gradient(
+    90deg,
+    var(--ochre),
+    var(--coral),
+    var(--rust)
+  );
+  --gradient-soft: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--ochre) 22%, #fff) 0%,
+    color-mix(in srgb, var(--coral) 12%, #fff) 50%,
+    color-mix(in srgb, var(--mauve) 10%, #fff) 100%
+  );
+
+  /* Surfaces claires dérivées de la palette (lisibilité) */
+  --color-bg: color-mix(in srgb, var(--ochre) 8%, #fff);
+  --color-bg-elevated: #fff;
+  --color-bg-muted: color-mix(in srgb, var(--mauve) 12%, #fff);
+  --color-bg-sidebar: var(--slate);
+  --color-bg-hero: var(--gradient-soft);
+
+  /* Texte = #3C524D */
+  --color-text: var(--slate);
+  --color-text-muted: color-mix(in srgb, var(--slate) 72%, var(--mauve));
+  --color-text-inverse: color-mix(in srgb, var(--ochre) 8%, #fff);
+  --color-text-on-accent: color-mix(in srgb, var(--ochre) 8%, #fff);
+
+  --color-accent: var(--ochre);
+  --color-accent-strong: var(--rust);
+  --color-accent-warm: var(--coral);
+
+  --color-border: color-mix(in srgb, var(--mauve) 28%, #fff);
+  --color-border-strong: var(--mauve);
+
+  --color-success: var(--ochre);
+  --color-success-bg: color-mix(in srgb, var(--ochre) 18%, #fff);
+  --color-error: var(--rust);
+  --color-error-bg: color-mix(in srgb, var(--coral) 20%, #fff);
+
+  --color-focus: var(--ochre);
+  --color-link: var(--rust);
+
+  --color-code-bg: var(--slate);
+  --color-code-text: color-mix(in srgb, var(--ochre) 15%, #fff);
+  --color-code-header: var(--mauve);
+
+  --color-highlight: color-mix(in srgb, var(--ochre) 35%, #fff);
+  --color-progress: var(--ochre);
+  --color-overlay: color-mix(in srgb, var(--slate) 55%, transparent);
+
+  --color-sidebar-link: color-mix(in srgb, var(--ochre) 25%, #fff);
+  --color-sidebar-active-bg: color-mix(in srgb, var(--ochre) 28%, transparent);
+  --color-sidebar-active-text: var(--ochre);
+
+  --font-display: "Trebuchet MS", "Century Gothic", "Gill Sans", "Segoe UI", sans-serif;
+  --font-sans: "Gill Sans", "Trebuchet MS", "Lucida Grande", "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", "Lucida Console", monospace;
+
+  --font-size-xs: clamp(0.7rem, 0.65rem + 0.2vw, 0.78rem);
+  --font-size-sm: clamp(0.8125rem, 0.78rem + 0.25vw, 0.9rem);
+  --font-size-base: clamp(1rem, 0.95rem + 0.3vw, 1.0625rem);
+  --font-size-lg: clamp(1.1rem, 1rem + 0.45vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  --font-size-2xl: clamp(1.55rem, 1.25rem + 1.2vw, 2rem);
+  --font-size-3xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --line-height-tight: 1.15;
+  --line-height-base: 1.7;
+  --line-height-loose: 1.85;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  --space-10: clamp(3rem, 2.5rem + 3vw, 5rem);
+  --space-page-x: clamp(1rem, 3vw, 2.5rem);
+
+  --sidebar-width: clamp(16.5rem, 22vw, 19rem);
+  --header-height: 3.75rem;
+  --content-max: 44rem;
+  --content-wide: 52rem;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--slate) 12%, transparent);
+  --shadow-md: 0 8px 24px color-mix(in srgb, var(--slate) 14%, transparent);
+  --shadow-lg: 0 16px 40px color-mix(in srgb, var(--slate) 18%, transparent);
+  --shadow-accent: 0 8px 28px color-mix(in srgb, var(--ochre) 28%, transparent);
+  --transition-fast: 160ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-base: 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  --touch-min: 44px;
+  --z-sidebar: 100;
+  --z-header: 110;
+  --z-overlay: 90;
+  --z-toast: 200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+  }
+}

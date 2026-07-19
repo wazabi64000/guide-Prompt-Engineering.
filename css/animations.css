@@ -1,0 +1,114 @@
+/**
+ * animations.css
+ * Mouvements intentionnels — présence & hiérarchie
+ */
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-rail {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.hero {
+  animation: fade-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero::before {
+  transform-origin: top center;
+  animation: slide-rail 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.chapter {
+  animation: fade-in 0.4s ease both;
+}
+
+.anatomy-step {
+  animation: fade-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anatomy-step:nth-child(1) { animation-delay: 0.04s; }
+.anatomy-step:nth-child(2) { animation-delay: 0.1s; }
+.anatomy-step:nth-child(3) { animation-delay: 0.16s; }
+.anatomy-step:nth-child(4) { animation-delay: 0.22s; }
+.anatomy-step:nth-child(5) { animation-delay: 0.28s; }
+
+.info-card {
+  animation: fade-rise 0.4s ease both;
+}
+
+.info-card:nth-child(1) { animation-delay: 0.05s; }
+.info-card:nth-child(2) { animation-delay: 0.12s; }
+.info-card:nth-child(3) { animation-delay: 0.18s; }
+
+.nav-list a.is-active,
+.nav-list a[aria-current="page"] {
+  transition: background var(--transition-fast), color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.filter-chip[aria-pressed="true"] {
+  animation: soft-pulse 0.35s ease;
+}
+
+.btn:active {
+  transition-duration: 80ms;
+}
+
+.progress-bar {
+  transition: width 120ms linear;
+}
+
+.sidebar {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .hero::before,
+  .chapter,
+  .anatomy-step,
+  .info-card,
+  .filter-chip[aria-pressed="true"] {
+    animation: none !important;
+  }
+
+  .accordion-icon,
+  .progress-bar,
+  .sidebar,
+  .overlay,
+  .toast,
+  .info-card,
+  .btn {
+    transition: none !important;
+  }
+
+  .info-card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guide pédagogique complet sur le Prompt Engineering pour étudiants CDA et développeurs web.">
+  <meta name="theme-color" content="#3C524D">
+  <title>Guide Prompt Engineering — Support CDA</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu-principal">Aller au contenu</a>
+
+  <div class="app-shell">
+    <div id="sidebar-overlay" class="overlay" aria-hidden="true"></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Menu du guide">
+      <div class="sidebar-header">
+        <div class="brand">
+          <p class="brand-title">Prompt Engineering</p>
+          <p class="brand-subtitle">Guide pédagogique CDA</p>
+        </div>
+        <button type="button" id="sidebar-close" class="btn btn-icon sidebar-close" aria-label="Fermer le menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="search-wrap search-wrap--mobile">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <label class="sr-only" for="search-input-mobile">Rechercher dans le guide</label>
+        <input type="search" id="search-input-mobile" class="search-input" placeholder="Rechercher…" autocomplete="off">
+        <ul id="search-results-mobile" class="search-results" role="listbox" aria-label="Résultats de recherche" hidden></ul>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Chapitres">
+        <p class="nav-group-title">Sommaire</p>
+        <ul class="nav-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#chapitre-1">1. Qu'est-ce qu'un prompt ?</a></li>
+          <li><a href="#chapitre-2">2. Anatomie d'un bon prompt</a></li>
+          <li><a href="#chapitre-3">3. Bonnes pratiques</a></li>
+          <li><a href="#chapitre-4">4. Erreurs fréquentes</a></li>
+          <li><a href="#chapitre-5">5. Les rôles</a></li>
+          <li><a href="#chapitre-6">6. Développement web</a></li>
+          <li><a href="#chapitre-7">7. Utiliser ChatGPT</a></li>
+          <li><a href="#chapitre-8">8. Utiliser Cursor</a></li>
+          <li><a href="#chapitre-9">9. GitHub Copilot</a></li>
+          <li><a href="#chapitre-10">10. Concepts avancés</a></li>
+          <li><a href="#chapitre-11">11. Bibliothèque de prompts</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="main-area">
+      <header class="top-bar">
+        <button type="button" id="menu-toggle" class="btn btn-icon menu-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Ouvrir le menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <label class="sr-only" for="search-input">Rechercher dans le guide</label>
+          <input type="search" id="search-input" class="search-input" placeholder="Rechercher dans le guide…" autocomplete="off" aria-autocomplete="list" aria-controls="search-results">
+          <ul id="search-results" class="search-results" role="listbox" aria-label="Résultats de recherche" hidden></ul>
+        </div>
+
+        <div class="top-bar-actions" aria-hidden="true"></div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="reading-progress" class="progress-bar" role="progressbar" aria-label="Progression de lecture" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        </div>
+      </header>
+
+      <main id="contenu-principal" class="content">
+        <div class="content-inner">
+
+<header class="hero" id="introduction">
+  <p class="hero-eyebrow">Prompt Engineering</p>
+  <h1>Guide du Prompt Engineering</h1>
+  <p class="hero-lead">Un support de lecture complet pour apprendre à dialoguer efficacement avec les intelligences artificielles génératives — sans prérequis.</p>
+ 
+</header>
+
+<section class="chapter" id="introduction-contenu" aria-labelledby="intro-title">
+  <h2 id="intro-title">Introduction</h2>
+
+  <div class="objectives" aria-label="Objectifs pédagogiques">
+    <h3>Objectifs pédagogiques</h3>
+    <p class="mb-0">À la fin de ce guide, vous serez capable de :</p>
+    <ul>
+      <li>comprendre ce qu'est un prompt ;</li>
+      <li>comprendre le rôle du Prompt Engineering ;</li>
+      <li>rédiger un prompt structuré ;</li>
+      <li>dialoguer efficacement avec une IA ;</li>
+      <li>améliorer progressivement vos prompts ;</li>
+      <li>connaître les principaux outils d'IA générative.</li>
+    </ul>
+  </div>
+
+  <h3>Qu'est-ce que l'IA générative ?</h3>
+  <p>L'<strong>intelligence artificielle générative</strong> désigne des modèles capables de produire du contenu nouveau : texte, code, images, audio. Contrairement aux systèmes qui se limitent à classer ou prédire, ces modèles <em>génèrent</em> une réponse à partir d'une instruction formulée en langage naturel — le <strong>prompt</strong>.</p>
+  <p>Les modèles de langage (LLM) comme GPT, Claude ou Gemini ont été entraînés sur d'immenses corpus. Ils prédisent le prochain token le plus probable compte tenu du contexte. Résultat : ils peuvent expliquer un concept, écrire une fonction, reformuler un e-mail ou proposer une architecture — à condition d'être bien guidés.</p>
+
+  <h3>Pourquoi apprendre le Prompt Engineering ?</h3>
+  <p>Le <strong>Prompt Engineering</strong> est l'art et la méthode de formuler des instructions claires, structurées et contextuelles pour obtenir le meilleur résultat d'une IA. Ce n'est pas une « magie » : c'est une compétence de communication technique, proche de la rédaction d'un cahier des charges ou d'une user story.</p>
+  <p>Sans méthode, on obtient des réponses vagues, incomplètes ou incorrectes. Avec une méthode, on gagne du temps, on réduit les allers-retours et on produit des livrables exploitables en formation et en entreprise.</p>
+
+  <h3>Bénéfices dans le monde professionnel</h3>
+  <div class="card-grid card-grid--3">
+    <article class="info-card">
+      <h4>Productivité</h4>
+      <p>Accélérer la rédaction de code, de documentation, de tests et de spécifications.</p>
+    </article>
+    <article class="info-card">
+      <h4>Qualité</h4>
+      <p>Obtenir des sorties structurées, vérifiables et adaptées au contexte métier.</p>
+    </article>
+    <article class="info-card">
+      <h4>Montée en compétences</h4>
+      <p>Utiliser l'IA comme tuteur pour comprendre un stack, un bug ou un concept.</p>
+    </article>
+  </div>
+
+  <h3>Métiers concernés</h3>
+  <p>Le Prompt Engineering touche presque tous les métiers du numérique : développement (front, back, full stack), UX/UI, product ownership, scrum, formation, cybersécurité (pentester, SOC), DevOps, administration système, data, marketing, rédaction web et gestion de projet.</p>
+
+  <h3>Principaux modèles d'IA</h3>
+  <div class="tabs" data-tabs="modeles">
+    <div class="tab-list" role="tablist" aria-label="Modèles d'IA">
+      <button type="button" role="tab" id="tab-gpt" aria-controls="panel-gpt" aria-selected="true">ChatGPT / GPT</button>
+      <button type="button" role="tab" id="tab-claude" aria-controls="panel-claude" aria-selected="false">Claude</button>
+      <button type="button" role="tab" id="tab-gemini" aria-controls="panel-gemini" aria-selected="false">Gemini</button>
+      <button type="button" role="tab" id="tab-outils" aria-controls="panel-outils" aria-selected="false">Outils IDE</button>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-gpt" aria-labelledby="tab-gpt">
+      <p><strong>ChatGPT</strong> (OpenAI) est un assistant conversationnel polyvalent, très utilisé pour le code, la rédaction et l'explication de concepts. Les modèles GPT se distinguent par leur capacité de raisonnement et leur écosystème (API, plugins, agents).</p>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-claude" aria-labelledby="tab-claude" hidden>
+      <p><strong>Claude</strong> (Anthropic) excelle souvent sur les longs contextes, l'analyse de documents et la rédaction technique soignée. Fréquemment intégré dans des environnements de développement assisté.</p>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-gemini" aria-labelledby="tab-gemini" hidden>
+      <p><strong>Gemini</strong> (Google) s'intègre à l'écosystème Google et propose des capacités multimodales (texte, image). Utile pour la productivité bureautique et certaines tâches de code.</p>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-outils" aria-labelledby="tab-outils" hidden>
+      <p><strong>Cursor</strong>, <strong>GitHub Copilot</strong> et d'autres assistants IDE intègrent des LLM directement dans le flux de développement : complétion, chat contextuel, édition multi-fichiers. Le prompt y est souvent implicite (fichier ouvert, sélection, conventions du dépôt).</p>
+    </div>
+  </div>
+
+  <div class="callout callout--tip">
+    <span class="callout-title">Conseil de lecture</span>
+    <p>Parcourez les chapitres dans l'ordre la première fois. Ensuite, utilisez le menu, la recherche et la bibliothèque de prompts (chapitre 11) comme référence quotidienne.</p>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-1" aria-labelledby="c1-title">
+  <h2 id="c1-title">Chapitre 1 — Qu'est-ce qu'un prompt ?</h2>
+  <p class="lead">Un prompt est l'instruction que vous donnez à une IA pour obtenir une réponse utile.</p>
+
+  <h3>Définition</h3>
+  <p>Un <strong>prompt</strong> est un message (souvent en langage naturel) qui décrit ce que vous attendez du modèle : une explication, du code, un plan, une correction, etc. Il peut être une phrase courte ou un brief détaillé de plusieurs paragraphes.</p>
+
+  <h3>Fonctionnement (vue simplifiée)</h3>
+  <div class="concept-schema" aria-label="Schéma du fonctionnement d'un prompt">
+    <span class="schema-node">Votre intention</span>
+    <span class="schema-arrow" aria-hidden="true">→</span>
+    <span class="schema-node schema-node--accent">Prompt rédigé</span>
+    <span class="schema-arrow" aria-hidden="true">→</span>
+    <span class="schema-node">Modèle (LLM)</span>
+    <span class="schema-arrow" aria-hidden="true">→</span>
+    <span class="schema-node">Réponse générée</span>
+    <span class="schema-arrow" aria-hidden="true">→</span>
+    <span class="schema-node schema-node--accent">Vous vérifiez</span>
+  </div>
+  <p>Le modèle ne « comprend » pas comme un humain : il produit la suite la plus probable. Votre prompt conditionne fortement cette suite. D'où l'importance du contexte, des contraintes et du format.</p>
+
+  <h3>Les ingrédients d'un prompt</h3>
+  <dl class="def-list">
+    <dt>Contexte</dt>
+    <dd>Qui vous êtes, où vous intervenez, quelles sont les données de départ (stack, public, contraintes projet).</dd>
+    <dt>Instructions</dt>
+    <dd>Ce que le modèle doit faire concrètement (expliquer, générer, comparer, refactoriser…).</dd>
+    <dt>Contraintes</dt>
+    <dd>Ce qu'il ne doit pas faire, les limites techniques, le niveau de langage, la longueur.</dd>
+    <dt>Résultat attendu</dt>
+    <dd>La forme de la sortie : liste, code, tableau, JSON, étapes numérotées…</dd>
+  </dl>
+
+  <h3>Exemples progressifs</h3>
+  <p><strong>Niveau 1 — trop vague</strong></p>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Exemple faible</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Explique JavaScript.</code></pre>
+</div><p><strong>Niveau 2 — mieux ciblé</strong></p><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Exemple intermédiaire</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Explique JavaScript à un débutant CDA en 8 puces, avec un exemple de variable et de fonction.</code></pre>
+</div><p><strong>Niveau 3 — structuré</strong></p><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Exemple recommandé</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rôle : formateur CDA bienveillant.
+Contexte : apprenant débutant, aucun prérequis JS.
+Objectif : expliquer ce qu'est JavaScript et à quoi il sert dans une page web.
+Contraintes :
+- français simple ;
+- maximum 200 mots ;
+- 1 analogie du quotidien ;
+- 1 mini exemple de code commenté.
+Format : titre court, puis paragraphes, puis exemple.</code></pre>
+</div>
+  <div class="callout callout--success">
+    <span class="callout-title">À retenir</span>
+    <p>Plus votre prompt précise le <em>qui</em>, le <em>quoi</em>, le <em>comment</em> et le <em>sous quelle forme</em>, plus la réponse sera actionnable.</p>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-2" aria-labelledby="c2-title">
+  <h2 id="c2-title">Chapitre 2 — Anatomie d'un bon prompt</h2>
+  <p class="lead">Cinq blocs suffisent pour structurer la quasi-totalité des demandes professionnelles.</p>
+
+  <div class="anatomy-schema" aria-label="Schéma de l'anatomie d'un prompt">
+    <div class="anatomy-step">
+      <span class="anatomy-num">1</span>
+      <div class="anatomy-body">
+        <strong>Rôle</strong>
+        <span>Qui doit « incarner » le modèle ? (ex. développeur Front-End senior, PO, formateur)</span>
+      </div>
+    </div>
+    <div class="anatomy-step">
+      <span class="anatomy-num">2</span>
+      <div class="anatomy-body">
+        <strong>Contexte</strong>
+        <span>Projet, public, stack, fichiers déjà existants, contraintes métier.</span>
+      </div>
+    </div>
+    <div class="anatomy-step">
+      <span class="anatomy-num">3</span>
+      <div class="anatomy-body">
+        <strong>Objectif</strong>
+        <span>La mission unique et claire à accomplir dans cette réponse.</span>
+      </div>
+    </div>
+    <div class="anatomy-step">
+      <span class="anatomy-num">4</span>
+      <div class="anatomy-body">
+        <strong>Contraintes</strong>
+        <span>Technologies autorisées, style, longueur, interdits (pas de CDN, pas de framework…).</span>
+      </div>
+    </div>
+    <div class="anatomy-step">
+      <span class="anatomy-num">5</span>
+      <div class="anatomy-body">
+        <strong>Format de sortie</strong>
+        <span>Code prêt à coller, liste, tableau Markdown, JSON, checklist…</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Exemple complet annoté</h3>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Template R-C-O-C-F</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rôle : Développeur Front-End Senior (HTML5, CSS3, JS ES6), pédagogue.
+Contexte : guide de formation CDA ouvert via index.html, sans framework ni CDN.
+Objectif : proposer la structure HTML sémantique d'une section « Anatomie d'un prompt ».
+Contraintes :
+- accessibilité (titres hiérarchisés, textes alternatifs si images) ;
+- mobile first ;
+- aucun framework.
+Format : bloc HTML commenté + courte explication (5 lignes max).</code></pre>
+</div>
+  <div class="accordion" data-accordion="anatomie">
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="acc-role" aria-expanded="false" aria-controls="acc-role-panel">
+          Pourquoi le rôle change la réponse
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="acc-role-panel" role="region" aria-labelledby="acc-role" hidden>
+        <p>Demander « explique Docker » à un formateur débutant ou à un SRE ne produit pas le même niveau de détail, ni le même vocabulaire. Le rôle oriente le ton, la profondeur et les priorités.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="acc-format" aria-expanded="false" aria-controls="acc-format-panel">
+          Pourquoi le format évite le rework
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="acc-format-panel" role="region" aria-labelledby="acc-format" hidden>
+        <p>Si vous devez coller la réponse dans un README, demandez du Markdown. Si vous devez l'injecter dans un script, demandez du JSON valide. Le format fait partie du contrat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-3" aria-labelledby="c3-title">
+  <h2 id="c3-title">Chapitre 3 — Les bonnes pratiques</h2>
+  <p class="lead">Six réflexes pour passer d'une demande floue à un prompt professionnel.</p>
+
+  <h3>1. Être précis</h3>
+  <p>Remplacez les adjectifs vagues (« bien », « moderne », « rapide ») par des critères mesurables : stack, longueur, public, critères d'acceptation.</p>
+<div class="compare-grid">
+  <article class="compare-card compare-card--bad">
+    <div class="compare-card-header">❌ Mauvais prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">À éviter</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Fais un site moderne.</code></pre>
+    </div>
+    <p>Trop large : le modèle invente le brief.</p>
+  </article>
+  <article class="compare-card compare-card--good">
+    <div class="compare-card-header">✅ Bon prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">Recommandé</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Crée une page d'accueil HTML/CSS pour un portfolio développeur CDA.
+Style : épuré, mobile first, palette fond #F4F3EE / texte #463F3A.
+Sections : hero, projets (3), contact.
+Pas de framework ni CDN.</code></pre>
+    </div>
+    <p>Critères concrets : le modèle peut livrer quelque chose d'évaluable.</p>
+  </article>
+</div><h3>2. Fournir du contexte</h3><p>Indiquez le niveau de l'audience, les fichiers déjà présents, les contraintes scolaires ou d'entreprise.</p><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Contexte projet</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Contexte : dépôt déjà structuré (css/, js/, index.html).
+Les variables de couleur existent dans variables.css.
+N'introduis pas de nouvelles dépendances.
+Objectif : ajouter un composant accordéon accessible dans components.css + navigation.js.</code></pre>
+</div><h3>3. Définir clairement un objectif</h3><p>Une mission principale par prompt. Si vous avez trois objectifs, faites trois prompts (ou une liste numérotée explicitement priorisée).</p><h3>4. Imposer un format de réponse</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Contrat de format</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Format de sortie obligatoire :
+1. Résumé (3 lignes)
+2. Code complet
+3. Checklist de vérifications (5 items)
+Aucun autre texte hors de cette structure.</code></pre>
+</div><h3>5. Découper une demande complexe</h3><p>Pour une application complète : d'abord l'architecture, puis le HTML, puis le CSS, puis le JS. Chaque étape s'appuie sur la précédente.</p>
+  <ol>
+    <li>Demander le plan des fichiers et responsabilités.</li>
+    <li>Générer le HTML sémantique.</li>
+    <li>Styler mobile first.</li>
+    <li>Ajouter l'interactivité (navigation, copie, recherche).</li>
+    <li>Passer une revue accessibilité.</li>
+  </ol>
+<h3>6. Améliorer par itérations</h3><p>Traitez le premier jet comme un brouillon. Ensuite : « garde la structure, simplifie le vocabulaire », « ajoute 2 exemples », « corrige l'accessibilité clavier ».</p><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Itération</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Améliore ta réponse précédente :
+- conserve la structure HTML ;
+- réduis le CSS de 20 % sans perdre le responsive ;
+- ajoute les attributs ARIA manquants ;
+- explique chaque changement en une phrase.</code></pre>
+</div>
+  <div class="callout callout--tip">
+    <span class="callout-title">Méthode SCRIBE (aide-mémoire)</span>
+    <p><strong>S</strong>ituation · <strong>C</strong>ible · <strong>R</strong>ôle · <strong>I</strong>nstructions · <strong>B</strong>ornes (contraintes) · <strong>E</strong>xigence de format.</p>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-4" aria-labelledby="c4-title">
+  <h2 id="c4-title">Chapitre 4 — Les erreurs fréquentes</h2>
+  <p class="lead">Comparer un mauvais et un bon prompt entraîne l'œil plus vite qu'un long discours.</p>
+
+  <h3>Manque de contexte</h3>
+<div class="compare-grid">
+  <article class="compare-card compare-card--bad">
+    <div class="compare-card-header">❌ Mauvais prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">À éviter</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Corrige mon code.</code></pre>
+    </div>
+    <p>Aucun extrait, aucun symptôme.</p>
+  </article>
+  <article class="compare-card compare-card--good">
+    <div class="compare-card-header">✅ Bon prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">Recommandé</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Voici une fonction JS qui doit filtrer une liste de prompts par catégorie.
+Bug : les accents cassent le filtre.
+Stack : vanilla ES6, navigateur moderne.
+Colle le correctif + 1 test manuel à faire.</code></pre>
+    </div>
+    <p>Contexte + symptôme + livrable attendu.</p>
+  </article>
+</div><h3>Demande trop vague</h3><div class="compare-grid">
+  <article class="compare-card compare-card--bad">
+    <div class="compare-card-header">❌ Mauvais prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">À éviter</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Parle-moi de la cybersécurité.</code></pre>
+    </div>
+    
+  </article>
+  <article class="compare-card compare-card--good">
+    <div class="compare-card-header">✅ Bon prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">Recommandé</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Pour un étudiant CDA débutant, explique la notion de surface d'attaque web en 6 puces,
+avec 1 exemple concret (formulaire de login) et 1 contre-mesure.</code></pre>
+    </div>
+    
+  </article>
+</div><h3>Plusieurs objectifs mélangés</h3><div class="compare-grid">
+  <article class="compare-card compare-card--bad">
+    <div class="compare-card-header">❌ Mauvais prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">À éviter</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Écris mon API, mon README, mes tests et mon Dockerfile.</code></pre>
+    </div>
+    <p>Trop de chantiers = résultats superficiels.</p>
+  </article>
+  <article class="compare-card compare-card--good">
+    <div class="compare-card-header">✅ Bon prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">Recommandé</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Étape 1/4 — Architecture uniquement.
+Propose l'arborescence et les responsabilités des modules pour une API Express de gestion de prompts.
+Pas de code détaillé encore. Format : liste de fichiers + 1 phrase chacun.</code></pre>
+    </div>
+    <p>Un objectif clair, les suivants viendront ensuite.</p>
+  </article>
+</div><h3>Absence de contraintes</h3><div class="compare-grid">
+  <article class="compare-card compare-card--bad">
+    <div class="compare-card-header">❌ Mauvais prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">À éviter</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Fais une interface de guide.</code></pre>
+    </div>
+    
+  </article>
+  <article class="compare-card compare-card--good">
+    <div class="compare-card-header">✅ Bon prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">Recommandé</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Crée l'UI d'un guide pédagogique.
+Contraintes non négociables : HTML/CSS/JS only, pas de framework, pas de CDN, pas de backend,
+palette fond #F4F3EE, texte #463F3A, accent #BCB8B1, mobile first, accessible clavier.</code></pre>
+    </div>
+    
+  </article>
+</div><h3>Absence de format attendu</h3><div class="compare-grid">
+  <article class="compare-card compare-card--bad">
+    <div class="compare-card-header">❌ Mauvais prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">À éviter</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Donne-moi des bonnes pratiques Git.</code></pre>
+    </div>
+    
+  </article>
+  <article class="compare-card compare-card--good">
+    <div class="compare-card-header">✅ Bon prompt</div>
+    <div class="prompt-block">
+      <div class="prompt-block-header">
+        <span class="prompt-label">Recommandé</span>
+        <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+      </div>
+      <pre><code>Liste 8 bonnes pratiques Git pour étudiants CDA.
+Format : tableau Markdown | Pratique | Pourquoi | Exemple de commande |.</code></pre>
+    </div>
+    
+  </article>
+</div>
+  <div class="callout callout--warning">
+    <span class="callout-title">Piège classique</span>
+    <p>Accepter la première réponse sans la relire. L'IA peut halluciner des API, des chemins de fichiers ou des commandes. La vérification humaine reste obligatoire — surtout en cybersécurité et en production.</p>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-5" aria-labelledby="c5-title">
+  <h2 id="c5-title">Chapitre 5 — Les rôles</h2>
+  <p class="lead">Assigner un rôle professionnel oriente le vocabulaire, les priorités et le niveau de détail de la réponse.</p>
+  <p>Voici des amorces prêtes à l'emploi pour les métiers du numérique. Adaptez le contexte (projet, stack, public) avant d'envoyer.</p>
+  <div class="accordion" data-accordion="roles">
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-0-btn" aria-expanded="false" aria-controls="role-0-panel">
+          Développeur Front-End
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-0-panel" role="region" aria-labelledby="role-0-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Développeur Front-End</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es développeur Front-End senior (HTML/CSS/JS). Propose un composant d'onglets accessible WAI-ARIA, sans framework, avec explication pédagogique pour un CDA.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-1-btn" aria-expanded="false" aria-controls="role-1-panel">
+          Développeur Back-End
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-1-panel" role="region" aria-labelledby="role-1-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Développeur Back-End</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es développeur Back-End Node/Express. Concevois une route POST /api/prompts avec validation des champs title et category, réponses HTTP correctes, sans base de données (mémoire).</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-2-btn" aria-expanded="false" aria-controls="role-2-panel">
+          Développeur Full Stack
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-2-panel" role="region" aria-labelledby="role-2-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Développeur Full Stack</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es full stack. Explique comment relier un front statique à une API REST locale : endpoints, CORS en dev, gestion d'erreurs côté fetch. Schéma + étapes.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-3-btn" aria-expanded="false" aria-controls="role-3-panel">
+          UX/UI Designer
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-3-panel" role="region" aria-labelledby="role-3-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">UX/UI Designer</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es UX/UI designer. Produis les microcopy et la hiérarchie visuelle d'un écran « bibliothèque de prompts » (filtres, états vide/chargement/erreur). Pas de mockup Figma : spécification textuelle claire.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-4-btn" aria-expanded="false" aria-controls="role-4-panel">
+          Product Owner
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-4-panel" role="region" aria-labelledby="role-4-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Product Owner</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es Product Owner. Rédige 3 user stories INVEST pour un guide de Prompt Engineering (recherche, progression, mode sombre) avec critères d'acceptation Given/When/Then.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-5-btn" aria-expanded="false" aria-controls="role-5-panel">
+          Scrum Master
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-5-panel" role="region" aria-labelledby="role-5-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Scrum Master</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es Scrum Master. Anime une rétrospective sur l'adoption de l'IA dans une équipe étudiante : 5 questions, format 45 min, règles de bienveillance.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-6-btn" aria-expanded="false" aria-controls="role-6-panel">
+          Formateur
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-6-panel" role="region" aria-labelledby="role-6-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Formateur</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es formateur CDA. Construis un déroulé de 2 h sur « Anatomie d'un prompt » : objectifs, activités (sans quiz technique), supports, évaluation formative par observation.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-7-btn" aria-expanded="false" aria-controls="role-7-panel">
+          Pentester
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-7-panel" role="region" aria-labelledby="role-7-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Pentester</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es pentester web. Explique comment formuler des prompts pour générer des checklists OWASP sans demander d'exploits offensifs prêts à l'emploi. Exemples défensifs uniquement.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-8-btn" aria-expanded="false" aria-controls="role-8-panel">
+          Analyste SOC
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-8-panel" role="region" aria-labelledby="role-8-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Analyste SOC</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es analyste SOC. Propose un prompt pour résumer un ticket d'alerte (chronologie, IOC, impact, actions) au format fiche incident d'une page.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-9-btn" aria-expanded="false" aria-controls="role-9-panel">
+          DevOps
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-9-panel" role="region" aria-labelledby="role-9-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">DevOps</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es DevOps. Rédige un prompt pour obtenir un pipeline CI (lint+test) GitHub Actions pour un site statique HTML/CSS/JS, avec cache et Node pour les tests éventuels.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-10-btn" aria-expanded="false" aria-controls="role-10-panel">
+          Administrateur Système
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-10-panel" role="region" aria-labelledby="role-10-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Administrateur Système</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es administrateur système Linux. Demande à l'IA un runbook de sauvegarde d'un dossier /var/www/guide : rotation, permissions, vérification d'intégrité. Niveau débutant encadré.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-11-btn" aria-expanded="false" aria-controls="role-11-panel">
+          Data Analyst
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-11-panel" role="region" aria-labelledby="role-11-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Data Analyst</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es data analyst. Crée un prompt pour faire nettoyer un CSV de tickets (colonnes date, type, priorité) et produire des stats descriptives + insights en français.</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-12-btn" aria-expanded="false" aria-controls="role-12-panel">
+          Marketing
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-12-panel" role="region" aria-labelledby="role-12-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Marketing</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es marketing digital B2B. Rédige un prompt pour un email de lancement d'une formation Prompt Engineering (objet A/B, corps 120 mots, CTA).</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-13-btn" aria-expanded="false" aria-controls="role-13-panel">
+          Rédacteur Web
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-13-panel" role="region" aria-labelledby="role-13-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Rédacteur Web</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es rédacteur web SEO. Produis un plan Hn pour un article « Prompt Engineering pour développeurs » (intention informationnelle, 1200 mots cibles).</code></pre>
+</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h3 class="mt-0">
+        <button type="button" class="accordion-trigger" id="role-14-btn" aria-expanded="false" aria-controls="role-14-panel">
+          Chef de Projet
+          <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="role-14-panel" role="region" aria-labelledby="role-14-btn" hidden>
+        <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Chef de Projet</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es chef de projet digital. Établis un planning 3 semaines pour livrer un guide HTML pédagogique : jalons, risques, RACI simplifié.</code></pre>
+</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="callout callout--tip">
+    <span class="callout-title">Astuce</span>
+    <p>Combinez rôle + contraintes d'éthique : « n'invente pas de CVE », « cite tes incertitudes », « propose une alternative plus simple pour un junior ».</p>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-6" aria-labelledby="c6-title">
+  <h2 id="c6-title">Chapitre 6 — Développement web</h2>
+  <p class="lead">Prompts professionnels pour les briques du quotidien d'un développeur web / CDA.</p>
+
+  <div class="tabs" data-tabs="devweb">
+    <div class="tab-list" role="tablist" aria-label="Technologies">
+      <button type="button" role="tab" id="tab-html" aria-controls="panel-html" aria-selected="true">HTML/CSS</button>
+      <button type="button" role="tab" id="tab-js" aria-controls="panel-js" aria-selected="false">JS/TS</button>
+      <button type="button" role="tab" id="tab-react" aria-controls="panel-react" aria-selected="false">React/Node</button>
+      <button type="button" role="tab" id="tab-data" aria-controls="panel-data" aria-selected="false">SQL/API/Git</button>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-html" aria-labelledby="tab-html">
+      <h3 class="mt-0">HTML</h3>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">HTML</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rôle : expert HTML5 accessible.
+Objectif : structurer une page « Chapitre » de guide pédagogique avec header sticky, main, navigation interne.
+Contraintes : sémantique, skip link, titres hiérarchiques, pas de divsoup.
+Format : HTML commenté.</code></pre>
+</div><h3>CSS</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">CSS</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Crée un fichier components.css pour : .prompt-block, .btn-copy, .compare-grid.
+Mobile first, variables déjà définies dans variables.css (référence-les).
+Pas de framework. Commentaires de section.</code></pre>
+</div>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-js" aria-labelledby="tab-js" hidden>
+      <h3 class="mt-0">JavaScript</h3>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">JavaScript</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Écris un module Search en ES6 (IIFE) :
+indexation des .chapter, filtre dès 2 caractères, navigation clavier haut/bas/entrée, Escape.
+Aucun framework. JSDoc sur les fonctions publiques.</code></pre>
+</div><h3>TypeScript</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">TypeScript</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Convertis cette idée de module Storage (get/set JSON avec préfixe) en TypeScript strict.
+Exporte des types Theme = 'light' | 'dark' et une fonction applyTheme(theme: Theme): void.</code></pre>
+</div>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-react" aria-labelledby="tab-react" hidden>
+      <h3 class="mt-0">React</h3>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">React</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Crée un composant React + TS &lt;ProgressBar value={0-100} /&gt; accessible (role progressbar, aria-valuenow).
+Style via CSS module minimal ou classes déjà existantes. Pas de lib UI.</code></pre>
+</div><h3>Node.js & Express</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Node / Express</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>API Express : GET /api/health et GET /api/chapters (liste statique id+title).
+Structure : src/app.js, src/routes/chapters.js. Gestion d'erreur centralisée. ESM.</code></pre>
+</div>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="panel-data" aria-labelledby="tab-data" hidden>
+      <h3 class="mt-0">SQL</h3>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">SQL</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Schéma PostgreSQL pour mémoriser la progression de lecture :
+user_id, chapter_id, scroll_percent, updated_at.
+Contraintes d'unicité et index. Explique chaque choix.</code></pre>
+</div><h3>API REST</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">API REST</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Spécifie une API REST de bibliothèque de prompts : ressources, verbes, codes, exemple JSON.
+Style guide : noms pluriels, snake_case ou camelCase cohérent, pagination page/limit.</code></pre>
+</div><h3>Git</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Git</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Propose une convention de commits Conventional Commits pour ce guide pédagogique
+et 5 exemples de messages réalistes (feat, docs, fix, a11y, refactor).</code></pre>
+</div><h3>Tests</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Tests</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rédige des cas de tests manuels (checklist) pour : copie presse-papiers, recherche, mode sombre, menu mobile.
+Format : tableau | ID | Précondition | Étapes | Résultat attendu |.</code></pre>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-7" aria-labelledby="c7-title">
+  <h2 id="c7-title">Chapitre 7 — Utiliser ChatGPT</h2>
+  <p class="lead">ChatGPT brille en dialogue itératif : génération, explication, correction, documentation, optimisation, tests et revue.</p>
+<h3>Génération de code</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Génération de code</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Génère une fonction JS ES6 copyText(text) avec fallback execCommand,
+retourne Promise&lt;boolean&gt;, commentée pour étudiants CDA.</code></pre>
+</div><h3>Explication de code</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Explication de code</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Explique ce code ligne à ligne à un débutant, puis propose une analogie.
+Code :
+async function copyText(text) { await navigator.clipboard.writeText(text); }</code></pre>
+</div><h3>Correction</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Correction</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Ce snippet lance TypeError sur bouton Copier dans certains navigateurs.
+Diagnostique, corrige, liste 2 tests manuels.
+Code : {colle ici}</code></pre>
+</div><h3>Documentation</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Documentation</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rédige la JSDoc + un paragraphe README pour le module clipboard.js
+(usage, limites, accessibilité du feedback « Copié »).</code></pre>
+</div><h3>Optimisation</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Optimisation</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Optimise cette fonction d'indexation de recherche pour éviter de recalculer
+à chaque frappe : propose debounce + structure de données. Explique le gain.</code></pre>
+</div><h3>Création de tests</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Création de tests</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Propose des tests manuels et, si pertinent, des tests unitaires pseudocode
+pour Navigation.setSidebarOpen(true/false) (ARIA, Escape, overlay).</code></pre>
+</div><h3>Revue de code</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">ChatGPT — Revue de code</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Fais une revue bienveillante de ce PR front-end : qualité, a11y, perf, maintenabilité.
+Classe les remarques en Bloquant / Majeur / Mineur / Nice-to-have.</code></pre>
+</div>
+  <div class="callout callout--success">
+    <span class="callout-title">Bon réflexe ChatGPT</span>
+    <p>Collez toujours le code réel et précisez la version / l'environnement. Demandez les incertitudes : « indique ce dont tu n'es pas sûr ».</p>
+  </div>
+</section>
+
+<section class="chapter" id="chapitre-8" aria-labelledby="c8-title">
+  <h2 id="c8-title">Chapitre 8 — Utiliser Cursor</h2>
+  <p class="lead">Cursor intègre l'IA dans l'IDE : le contexte (fichiers ouverts, dépôt, règles) fait partie du prompt.</p>
+
+  <h3>Génération de fichiers</h3>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cursor — fichiers</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Dans ce dépôt (HTML/CSS/JS vanilla), crée js/search.js selon le README d'architecture :
+IIFE Search avec init/buildIndex, aucun import npm, brancher dans index.html après storage.js.
+Respecte le style des autres modules.</code></pre>
+</div><h3>Refactoring</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cursor — refactor</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Refactorise navigation.js : extrais initAccordions et initTabs sans changer le comportement.
+Ajoute des commentaires de section. Ne touche pas aux autres fichiers.</code></pre>
+</div><h3>Architecture</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cursor — architecture</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Analyse l'architecture actuelle du guide et propose (sans coder) une évolution
+pour ajouter des ancres « deep link » stables sur chaque notion du chapitre 10.
+Liste impacts HTML/JS/a11y.</code></pre>
+</div><h3>Création de composants</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cursor — composant</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Ajoute le composant CSS + markup pour .callout--tip / --success / --warning
+en cohérence avec variables.css. Montre un exemple dans le chapitre 3 uniquement.</code></pre>
+</div><h3>Correction de bugs</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cursor — bug</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Bug : sur mobile, le menu reste ouvert après clic sur un lien d'ancre.
+Reproduis mentalement le flux, corrige dans navigation.js, explique le fix en 3 lignes.</code></pre>
+</div><h3>Documentation</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cursor — docs</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Mets à jour README.md : structure des dossiers, comment ouvrir index.html,
+liste des fonctionnalités, note accessibilité. Ton professionnel français.</code></pre>
+</div><h3>Productivité</h3>
+  <ul>
+    <li>Sélectionnez le code concerné avant de demander une modification ciblée.</li>
+    <li>Mentionnez les fichiers à ne pas toucher.</li>
+    <li>Demandez un diff minimal plutôt qu'une réécriture totale.</li>
+    <li>Faites relire les changements d'accessibilité et de responsive.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="chapitre-9" aria-labelledby="c9-title">
+  <h2 id="c9-title">Chapitre 9 — GitHub Copilot</h2>
+  <p class="lead">Copilot complète en ligne : votre commentaire et le nom des symboles sont déjà un prompt.</p>
+
+  <h3>Autocomplétion</h3>
+  <p>Écrivez d'abord l'intention en commentaire, puis laissez Copilot proposer le corps.</p>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Commentaire amorce</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>// Retourne le pourcentage de scroll de la page (0-100), borné.
+function getScrollPercent() {
+</code></pre>
+</div><h3>Génération de fonctions</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Signature + JSDoc</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>/** Copie du texte dans le presse-papiers. Fallback si Clipboard API indisponible. @param {string} text @returns {Promise&lt;boolean&gt;} */
+async function copyText(text) {
+</code></pre>
+</div><h3>Commentaires & documentation</h3><div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Documentation inline</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Ajoute des commentaires de section clairs (pas de paraphrase ligne à ligne)
+dans progress.js pour un public CDA. Conservez le code existant.</code></pre>
+</div>
+  <h3>Bonnes pratiques Copilot</h3>
+  <ul>
+    <li>Nommez clairement variables et fonctions : Copilot s'aligne sur vos intentions.</li>
+    <li>Relisez chaque suggestion : elle peut ignorer vos contraintes « no CDN ».</li>
+    <li>Préférez des fichiers courts et modulaires pour un meilleur contexte.</li>
+    <li>Complétez avec des tests manuels sur mobile et clavier.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="chapitre-10" aria-labelledby="c10-title">
+  <h2 id="c10-title">Chapitre 10 — Concepts avancés</h2>
+  <p class="lead">Ces notions prolongent le Prompt Engineering vers des usages plus robustes et automatisés. Chaque fiche reste volontairement accessible.</p>
+
+  <article class="concept" id="zero-shot">
+    <h3>Zero-shot Prompting</h3>
+    <p><strong>Définition.</strong> Demander une tâche à l'IA sans fournir d'exemple, uniquement la consigne.</p>
+    <div class="concept-schema" aria-label="Schéma zero-shot"><span class="schema-node">Consigne</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">Modèle</span><span class="schema-arrow">→</span><span class="schema-node">Réponse</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Zero-shot Prompting</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Classifie le sentiment de ce message (positif, neutre, négatif).
+Message : "Le déploiement s'est bien passé, bravo à l'équipe."
+Réponds par un seul mot.</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Rapide à écrire</li><li>Peu de tokens consommés</li><li>Idéal pour tâches courantes</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Moins fiable sur formats rares</li><li>Style moins contrôlé</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Reformulation</li><li>Traduction</li><li>Résumé simple</li><li>Classification basique</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="few-shot">
+    <h3>Few-shot Prompting</h3>
+    <p><strong>Définition.</strong> Fournir 2 à 5 exemples avant la vraie requête pour guider le format et le style.</p>
+    <div class="concept-schema" aria-label="Schéma few-shot"><span class="schema-node">Exemples</span><span class="schema-arrow">+</span><span class="schema-node">Consigne</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">Modèle</span><span class="schema-arrow">→</span><span class="schema-node">Réponse calquée</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Few-shot Prompting</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Exemples :
+Entrée : "Le bouton ne répond pas" → bug
+Entrée : "Ajouter un export CSV" → feature
+Entrée : "C'est quoi un JWT ?" → question
+Classe : "Impossible de me connecter depuis Safari" →</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Meilleure conformité au format</li><li>Aligne le ton</li><li>Réduit les ambiguïtés</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Consomme du contexte</li><li>Exemples biaisés ⇒ sorties biaisées</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Classification de tickets</li><li>Extraction d'entités</li><li>Style éditorial</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="cot">
+    <h3>Chain of Thought</h3>
+    <p><strong>Définition.</strong> Demander à l'IA de raisonner étape par étape avant la réponse finale.</p>
+    <div class="concept-schema" aria-label="Schéma CoT"><span class="schema-node">Problème</span><span class="schema-arrow">→</span><span class="schema-node">Étape 1</span><span class="schema-arrow">→</span><span class="schema-node">Étape 2</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">Conclusion</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Chain of Thought</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Analyse ce bug en suivant strictement :
+1) symptômes 2) causes possibles 3) vérifications 4) correctif 5) risques.
+Code : {snippet}</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Meilleure qualité sur problèmes complexes</li><li>Debugging plus transparent</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Réponses plus longues</li><li>Pas une garantie de vérité</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Debug</li><li>Architecture</li><li>Diagnostic</li><li>Problèmes multi-contraintes</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="structured">
+    <h3>Structured Output</h3>
+    <p><strong>Définition.</strong> Imposer un schéma de sortie (JSON, Markdown, tableau) pour faciliter l'automatisation.</p>
+    <div class="concept-schema" aria-label="Schéma structured output"><span class="schema-node">Prompt + schéma</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">Modèle</span><span class="schema-arrow">→</span><span class="schema-node">JSON / tableau</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Structured Output</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Réponds UNIQUEMENT en JSON valide (aucun texte autour) :
+{"summary": string, "risks": string[], "nextSteps": string[]}
+Sujet : mise en production d'un guide statique vendredi.</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Intégrable dans un pipeline</li><li>Facile à valider</li><li>Moins de rework</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Rigidité</li><li>Validation JSON toujours nécessaire</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>APIs</li><li>Agents</li><li>Génération de configs</li><li>Tableaux de suivi</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="rag">
+    <h3>RAG (Retrieval Augmented Generation)</h3>
+    <p><strong>Définition.</strong> Enrichir le prompt avec des documents récupérés (syllabus, docs internes) avant génération.</p>
+    <div class="concept-schema" aria-label="Schéma RAG"><span class="schema-node">Question</span><span class="schema-arrow">→</span><span class="schema-node">Recherche docs</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">Prompt enrichi</span><span class="schema-arrow">→</span><span class="schema-node">Réponse citée</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">RAG (Retrieval Augmented Generation)</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu réponds UNIQUEMENT avec le contexte fourni.
+Contexte : """{documents}"""
+Question : {q}
+Si l'information est absente, réponds : "Information non trouvée dans le corpus."
+Cite le passage utilisé.</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Réponses ancrées dans vos sources</li><li>Réduit certaines hallucinations</li><li>Idéal pour FAQ métier</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Qualité dépend de la recherche</li><li>Nécessite un corpus propre</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Documentation interne</li><li>Syllabus CDA</li><li>Base de connaissance support</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="function-calling">
+    <h3>Function Calling</h3>
+    <p><strong>Définition.</strong> L'IA choisit d'appeler des fonctions déclarées (outils) avec des arguments structurés.</p>
+    <div class="concept-schema" aria-label="Schéma function calling"><span class="schema-node">User</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">LLM</span><span class="schema-arrow">→</span><span class="schema-node">Appel outil</span><span class="schema-arrow">→</span><span class="schema-node">Résultat</span><span class="schema-arrow">→</span><span class="schema-node">Réponse</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Function Calling</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Outils disponibles :
+- getWeather(city: string)
+- createTicket(title: string, priority: "low"|"medium"|"high")
+Question : "Il pleut à Lyon et mon VPN est down, ouvre un ticket urgent."
+Réponds par l'appel d'outil JSON approprié.</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Actions réelles (API, tickets)</li><li>Sorties machine-readable</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Conception des outils critique</li><li>Besoin de validation serveur</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Assistants métier</li><li>Automatisation</li><li>Orchestration API</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="mcp">
+    <h3>MCP (Model Context Protocol)</h3>
+    <p><strong>Définition.</strong> Protocole standardisant la connexion d'un modèle à des outils et sources de contexte externes.</p>
+    <div class="concept-schema" aria-label="Schéma MCP"><span class="schema-node">Agent / IDE</span><span class="schema-arrow">↔</span><span class="schema-node schema-node--accent">MCP</span><span class="schema-arrow">↔</span><span class="schema-node">Outils &amp; données</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">MCP (Model Context Protocol)</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Explique à un étudiant CDA, en analogie USB pour logiciels,
+comment un agent IDE utilise MCP pour exposer un outil search_docs
+sans hardcoder chaque intégration. 1 schéma ASCII + 5 phrases.</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Interopérabilité</li><li>Réutilisation d'intégrations</li><li>Séparation agent / outils</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Écosystème encore jeune</li><li>Gouvernance des accès à prévoir</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Agents IDE</li><li>Connexions Notion/Figma/DB</li><li>Outils internes entreprise</li></ul>
+    </div>
+  </article>
+
+  <article class="concept" id="agents">
+    <h3>Agents IA</h3>
+    <p><strong>Définition.</strong> Systèmes qui planifient, utilisent des outils et itèrent vers un objectif avec peu de supervision.</p>
+    <div class="concept-schema" aria-label="Schéma agent"><span class="schema-node">Objectif</span><span class="schema-arrow">→</span><span class="schema-node">Plan</span><span class="schema-arrow">→</span><span class="schema-node">Outils</span><span class="schema-arrow">→</span><span class="schema-node schema-node--accent">Itération</span><span class="schema-arrow">→</span><span class="schema-node">Livrable</span></div>
+    <h4>Exemple concret</h4>
+    <div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Agents IA</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es un agent de refactoring prudent.
+Objectif : extraire le module clipboard du monolithe app.js.
+Règles : diffs minimaux, ne pas casser l'API publique, résumer les fichiers touchés.
+Planifie puis exécute étape par étape.</code></pre>
+</div>
+    <div class="concept-grid">
+      <div class="concept-meta">
+        <h5>Avantages</h5>
+        <ul><li>Autonomie multi-étapes</li><li>Productivité sur tâches répétitives</li></ul>
+      </div>
+      <div class="concept-meta">
+        <h5>Limites</h5>
+        <ul><li>Coût</li><li>Erreurs en chaîne</li><li>Besoin de garde-fous</li></ul>
+      </div>
+    </div>
+    <div class="concept-meta">
+      <h5>Cas d'usage</h5>
+      <ul><li>Refactors assistés</li><li>Recherche documentaire</li><li>Orchestration DevOps</li></ul>
+    </div>
+  </article>
+</section>
+<section class="chapter" id="chapitre-11" aria-labelledby="c11-title">
+  <h2 id="c11-title">Chapitre 11 — Bibliothèque de prompts</h2>
+  <p class="lead">Plus de 50 prompts professionnels prêts à copier. Filtrez par catégorie, adaptez le contexte, puis itérez.</p>
+
+  <div class="library-filters" role="group" aria-label="Filtrer la bibliothèque">
+    <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">Tous</button>
+<button type="button" class="filter-chip" data-filter="html" aria-pressed="false">HTML</button>
+<button type="button" class="filter-chip" data-filter="css" aria-pressed="false">CSS</button>
+<button type="button" class="filter-chip" data-filter="javascript" aria-pressed="false">JavaScript</button>
+<button type="button" class="filter-chip" data-filter="typescript" aria-pressed="false">TypeScript</button>
+<button type="button" class="filter-chip" data-filter="react" aria-pressed="false">React</button>
+<button type="button" class="filter-chip" data-filter="node" aria-pressed="false">Node.js</button>
+<button type="button" class="filter-chip" data-filter="express" aria-pressed="false">Express</button>
+<button type="button" class="filter-chip" data-filter="sql" aria-pressed="false">SQL</button>
+<button type="button" class="filter-chip" data-filter="devops" aria-pressed="false">DevOps</button>
+<button type="button" class="filter-chip" data-filter="cyber" aria-pressed="false">Cybersécurité</button>
+<button type="button" class="filter-chip" data-filter="ia" aria-pressed="false">IA</button>
+<button type="button" class="filter-chip" data-filter="productivite" aria-pressed="false">Productivité</button>
+</div><div class="library-category" data-category="html" id="lib-html">
+<h3>HTML</h3>
+<h4 id="lib-html-1">1. Page sémantique</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">HTML — Page sémantique</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Tu es un développeur Front-End senior spécialisé en HTML5 accessible.
+Crée une page d'accueil pour une association culturelle locale.
+Contraintes : HTML5 sémantique (header, nav, main, section, footer), ARIA pertinent, aucun CSS inline, commentaires par zone.
+Format : code HTML complet prêt à coller.</code></pre>
+</div><h4 id="lib-html-2">2. Formulaire accessible</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">HTML — Formulaire accessible</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rôle : expert accessibilité web (WCAG 2.2 AA).
+Conçois un formulaire de contact : nom, email, sujet, message, consentement RGPD.
+Labels associés, autocomplete, messages d'erreur, focus décrit en commentaire. HTML5 uniquement.</code></pre>
+</div><h4 id="lib-html-3">3. Structure blog</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">HTML — Structure blog</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Génère la structure HTML d'un article de blog technique : titre, auteur, date, TOC, sections H2/H3, commentaires.
+Utilise article, time, aside. Pas de CSS.</code></pre>
+</div><h4 id="lib-html-4">4. Tableau de données</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">HTML — Tableau de données</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Crée un tableau HTML accessible listant 5 frameworks front-end (nom, langage, année, licence).
+Inclus caption, thead, tbody, scope sur les en-têtes.</code></pre>
+</div><h4 id="lib-html-5">5. Landing minimaliste</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">HTML — Landing minimaliste</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Squelette HTML d'une landing SaaS : hero, 3 bénéfices, témoignage, CTA, footer.
+Sémantique stricte, ids d'ancrage, lang="fr".</code></pre>
+</div></div>
+<div class="library-category" data-category="css" id="lib-css">
+<h3>CSS</h3>
+<h4 id="lib-css-6">6. Design tokens</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">CSS — Design tokens</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Propose un CSS de design tokens (couleurs, typo, espaces, rayons, ombres) pour une app éducative.
+Mobile first, commenté, sans framework.</code></pre>
+</div><h4 id="lib-css-7">7. Layout responsive</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">CSS — Layout responsive</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Layout CSS Grid + Flexbox : sidebar 280px + contenu.
+Sous 900px : sidebar tiroir (.is-open). Variables CSS, pas de framework.</code></pre>
+</div><h4 id="lib-css-8">8. Dark mode</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">CSS — Dark mode</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Thème clair/sombre via [data-theme="dark"] et prefers-color-scheme.
+Variables + exemple bouton toggle (HTML+CSS).</code></pre>
+</div><h4 id="lib-css-9">9. Composant carte</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">CSS — Composant carte</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Composant .card accessible (contraste, focus, hover sobre).
+États : défaut, hover, focus-within. Mobile first.</code></pre>
+</div><h4 id="lib-css-10">10. Animations légères</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">CSS — Animations légères</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Animations fade-in-up + respects prefers-reduced-motion pour .chapter et .hero.
+Durée max 450ms.</code></pre>
+</div></div>
+<div class="library-category" data-category="javascript" id="lib-javascript">
+<h3>JavaScript</h3>
+<h4 id="lib-javascript-11">11. Module navigation</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">JavaScript — Module navigation</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Module Navigation IIFE : menu mobile open/close, Escape, overlay, aria-expanded.
+Vanilla JS commenté, zéro dépendance.</code></pre>
+</div><h4 id="lib-javascript-12">12. Debounce</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">JavaScript — Debounce</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Fonction debounce(fn, delay) ES6 + exemple sur input recherche.</code></pre>
+</div><h4 id="lib-javascript-13">13. LocalStorage helper</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">JavaScript — LocalStorage helper</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Utilitaire Storage get/set/remove avec préfixe, try/catch JSON, JSDoc.</code></pre>
+</div><h4 id="lib-javascript-14">14. Accordéon accessible</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">JavaScript — Accordéon accessible</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Accordéon ARIA (aria-expanded, aria-controls, hidden), un panneau ouvert à la fois.</code></pre>
+</div><h4 id="lib-javascript-15">15. Fetch API</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">JavaScript — Fetch API</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>async getUsers(baseUrl) : GET /users, erreurs HTTP, retour JSON, JSDoc + exemple.</code></pre>
+</div></div>
+<div class="library-category" data-category="typescript" id="lib-typescript">
+<h3>TypeScript</h3>
+<h4 id="lib-typescript-16">16. Types API</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">TypeScript — Types API</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Définis User, ApiError, Paginated&lt;T&gt; pour une API REST en TypeScript strict (readonly, optionnels clairs).</code></pre>
+</div><h4 id="lib-typescript-17">17. Type guard</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">TypeScript — Type guard</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Type guard isApiError(value: unknown): value is ApiError + usage dans un catch.</code></pre>
+</div><h4 id="lib-typescript-18">18. Migration JS→TS</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">TypeScript — Migration JS→TS</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Réécris une validation d'email JS en TypeScript avec types et cas limites commentés.</code></pre>
+</div><h4 id="lib-typescript-19">19. Form types</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">TypeScript — Form types</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>ContactFormData + FormFieldErrors + validateContactForm retournant les erreurs.</code></pre>
+</div></div>
+<div class="library-category" data-category="react" id="lib-react">
+<h3>React</h3>
+<h4 id="lib-react-20">20. Button accessible</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">React — Button accessible</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Composant Button React+TS : variants primary/ghost, loading, disabled. Pas de lib UI.</code></pre>
+</div><h4 id="lib-react-21">21. Liste filtrable</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">React — Liste filtrable</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>PromptLibrary : filtre par catégorie, useState, chips clavier-accessibles.</code></pre>
+</div><h4 id="lib-react-22">22. Hook localStorage</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">React — Hook localStorage</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>useLocalStorage(key, initial) synchronisé, TypeScript, safe SSR.</code></pre>
+</div><h4 id="lib-react-23">23. Formulaire contrôlé</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">React — Formulaire contrôlé</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Formulaire contact contrôlé + validation inline + aria-live pour erreurs.</code></pre>
+</div><h4 id="lib-react-24">24. Tabs WAI-ARIA</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">React — Tabs WAI-ARIA</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Composant Tabs (tab/tablist/tabpanel, flèches) avec 3 panneaux d'exemple.</code></pre>
+</div></div>
+<div class="library-category" data-category="node" id="lib-node">
+<h3>Node.js</h3>
+<h4 id="lib-node-25">25. Serveur HTTP</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Node.js — Serveur HTTP</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Serveur http natif ESM (sans Express) : GET / et GET /health, commenté.</code></pre>
+</div><h4 id="lib-node-26">26. Lecture JSON</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Node.js — Lecture JSON</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>readJson(path) avec fs/promises, gestion ENOENT/JSON invalide, Result {ok, data|error}.</code></pre>
+</div><h4 id="lib-node-27">27. CLI</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Node.js — CLI</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Script CLI ESM --input/--out : lit un markdown et compte les mots (parse argv manuel).</code></pre>
+</div><h4 id="lib-node-28">28. Config env</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Node.js — Config env</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Module config : PORT, NODE_ENV, défauts + validation, process.env only.</code></pre>
+</div></div>
+<div class="library-category" data-category="express" id="lib-express">
+<h3>Express</h3>
+<h4 id="lib-express-29">29. API users</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Express — API users</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>API Express GET/POST /api/users, validation basique, router séparé, store mémoire.</code></pre>
+</div><h4 id="lib-express-30">30. Middleware erreur</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Express — Middleware erreur</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Middleware d'erreur : log, JSON {message, code}, stack masquée en production.</code></pre>
+</div><h4 id="lib-express-31">31. Auth JWT esquisse</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Express — Auth JWT esquisse</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>requireAuth Bearer token (vérificateur injectable), 401 si invalide, commenté CDA.</code></pre>
+</div><h4 id="lib-express-32">32. Rate limit</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Express — Rate limit</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Rate limiter mémoire 100 req/15 min/IP + headers X-RateLimit-*.</code></pre>
+</div></div>
+<div class="library-category" data-category="sql" id="lib-sql">
+<h3>SQL</h3>
+<h4 id="lib-sql-33">33. Schéma blog</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">SQL — Schéma blog</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Schéma PostgreSQL users/posts/comments avec PK/FK/index et explications.</code></pre>
+</div><h4 id="lib-sql-34">34. Jointure</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">SQL — Jointure</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>10 derniers articles + auteur + nombre de commentaires (PostgreSQL).</code></pre>
+</div><h4 id="lib-sql-35">35. Requête paramétrée</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">SQL — Requête paramétrée</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Recherche user par email en requête préparée (Node pg), anti-injection.</code></pre>
+</div><h4 id="lib-sql-36">36. Migration</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">SQL — Migration</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Migration : posts.published_at timestamptz + index partiel non null.</code></pre>
+</div></div>
+<div class="library-category" data-category="devops" id="lib-devops">
+<h3>DevOps</h3>
+<h4 id="lib-devops-37">37. Dockerfile Node</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">DevOps — Dockerfile Node</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Dockerfile multi-stage API Node ESM, user non-root, HEALTHCHECK, idées .dockerignore.</code></pre>
+</div><h4 id="lib-devops-38">38. GitHub Actions</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">DevOps — GitHub Actions</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Workflow CI : install, lint, test sur push/PR main, cache npm, Node 20.</code></pre>
+</div><h4 id="lib-devops-39">39. docker-compose</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">DevOps — docker-compose</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>compose api+Postgres 16, volumes, healthcheck, variables via .env.example décrit.</code></pre>
+</div><h4 id="lib-devops-40">40. Checklist prod</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">DevOps — Checklist prod</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Checklist mise en prod API Node (sécurité, logs, backups, monitoring), priorisée.</code></pre>
+</div></div>
+<div class="library-category" data-category="cyber" id="lib-cyber">
+<h3>Cybersécurité</h3>
+<h4 id="lib-cyber-41">41. Headers sécurité</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cybersécurité — Headers sécurité</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Propose headers sécurité Nginx (CSP, HSTS, X-Frame-Options…) avec justification courte.</code></pre>
+</div><h4 id="lib-cyber-42">42. OWASP API</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cybersécurité — OWASP API</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>5 risques OWASP liés aux APIs pour CDA : exemple + contre-mesure chacun.</code></pre>
+</div><h4 id="lib-cyber-43">43. Prompt injection</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cybersécurité — Prompt injection</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Explique la prompt injection : 3 exemples + 3 mitigations applicatives.</code></pre>
+</div><h4 id="lib-cyber-44">44. Gestion des secrets</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Cybersécurité — Gestion des secrets</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Bonnes pratiques secrets (env, vault, rotation) pour clé d'API LLM en projet étudiant.</code></pre>
+</div></div>
+<div class="library-category" data-category="ia" id="lib-ia">
+<h3>IA</h3>
+<h4 id="lib-ia-45">45. Vague → structuré</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">IA — Vague → structuré</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Transforme "aide-moi avec mon site" en prompt structuré rôle/contexte/objectif/contraintes/format.</code></pre>
+</div><h4 id="lib-ia-46">46. Few-shot tickets</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">IA — Few-shot tickets</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Prompt few-shot classifiant un ticket en bug|feature|question (3 exemples + zone Ticket).</code></pre>
+</div><h4 id="lib-ia-47">47. CoT debug</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">IA — CoT debug</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Prompt CoT bug JS : reformuler, hypothèses, tests, correctif, risques.</code></pre>
+</div><h4 id="lib-ia-48">48. JSON strict</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">IA — JSON strict</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Force JSON {title, tags[], difficulty 1-5}, aucun texte hors JSON.</code></pre>
+</div><h4 id="lib-ia-49">49. RAG syllabus</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">IA — RAG syllabus</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Prompt RAG sur syllabus CDA : contexte docs, question, citations, refus hors corpus.</code></pre>
+</div></div>
+<div class="library-category" data-category="productivite" id="lib-productivite">
+<h3>Productivité</h3>
+<h4 id="lib-productivite-50">50. Plan 7 jours</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Productivité — Plan 7 jours</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Plan de révision 7 jours Prompt Engineering (CDA), 45 min/jour, livrable quotidien.</code></pre>
+</div><h4 id="lib-productivite-51">51. CR réunion</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Productivité — CR réunion</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Transforme notes brutes en CR : décisions, actions (owner+échéance), questions ouvertes.</code></pre>
+</div><h4 id="lib-productivite-52">52. README guide</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Productivité — README guide</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Squelette README pro pour guide HTML/CSS/JS statique (ouverture locale, a11y, contrib).</code></pre>
+</div><h4 id="lib-productivite-53">53. Revue PR</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Productivité — Revue PR</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Checklist revue PR front-end 10 min : qualité, a11y, perf, sécurité.</code></pre>
+</div><h4 id="lib-productivite-54">54. Découpage US</h4>
+<div class="prompt-block">
+  <div class="prompt-block-header">
+    <span class="prompt-label">Productivité — Découpage US</span>
+    <button type="button" class="btn btn-copy" data-copy aria-label="Copier le contenu">Copier</button>
+  </div>
+  <pre><code>Découpe la US recherche dans le guide en tâches junior : tableau tâche/estimation/DoD.</code></pre>
+</div></div>
+<p class="text-muted">Total : <strong>54</strong> prompts dans la bibliothèque.</p>
+</section>
+
+<section class="chapter" id="conclusion" aria-labelledby="concl-title">
+  <h2 id="concl-title">Conclusion</h2>
+  <p class="lead">Le Prompt Engineering est une compétence de clarification : plus votre intention est nette, plus l'IA devient utile.</p>
+
+  <h3>Les bonnes pratiques à garder</h3>
+  <ul>
+    <li>Structurer avec rôle, contexte, objectif, contraintes, format.</li>
+    <li>Une mission principale par prompt (ou une priorisation explicite).</li>
+    <li>Itérer : préciser, simplifier, ajouter des exemples, imposer le format.</li>
+    <li>Toujours vérifier le résultat (surtout code, sécurité, faits).</li>
+  </ul>
+
+  <h3>Les erreurs à éviter</h3>
+  <ul>
+    <li>Demandes vagues sans public ni critères.</li>
+    <li>Absence de contexte projet / stack.</li>
+    <li>Objectifs multiples non découpés.</li>
+    <li>Confiance aveugle dans la première réponse.</li>
+  </ul>
+
+  <h3>Méthodologie simple (5 étapes)</h3>
+  <ol class="method-steps">
+    <li><strong>Clarifier l'intention</strong> — Qu'est-ce qui doit être vrai à la fin ?</li>
+    <li><strong>Cadre</strong> — Rôle + contexte + contraintes non négociables.</li>
+    <li><strong>Contrat de sortie</strong> — Format, longueur, niveau de langage.</li>
+    <li><strong>Générer</strong> — Envoyer le prompt, récupérer le brouillon.</li>
+    <li><strong>Itérer &amp; valider</strong> — Corriger, tester, documenter ce qui marche.</li>
+  </ol>
+
+  <h3>Ressources pour aller plus loin</h3>
+  <ul>
+    <li>Documentation officielle des outils que vous utilisez (ChatGPT, Cursor, Copilot).</li>
+    <li>Guides d'accessibilité WCAG pour valider vos interfaces générées.</li>
+    <li>OWASP pour les aspects sécurité liés aux applications et aux prompts.</li>
+    <li>Pratique quotidienne : transformez chaque tâche réelle en prompt structuré et gardez vos meilleures versions (chapitre 11).</li>
+  </ul>
+
+  <div class="callout callout--success">
+    <span class="callout-title">Prochaine étape</span>
+    <p>Choisissez un prompt de la bibliothèque proche de votre projet en cours, adaptez-le à votre stack, puis améliorez-le trois fois. La maîtrise vient de l'itération consciente.</p>
+  </div>
+</section>
+
+<footer class="footer-guide">
+  <p>Guide Prompt Engineering — Support pédagogique CDA · <span id="year"></span></p>
+  <p>HTML5 · CSS3 · JavaScript ES6 · Sans framework · Ouvrir <code>index.html</code> dans un navigateur</p>
+</footer>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/storage.js" defer></script>
+  <script src="js/clipboard.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/progress.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
